@@ -156,3 +156,24 @@ body {
     flex-direction: column;
   }
 }
+
+/* ===== Mensaje de error del formulario ===== */
+.task-form__error {
+  margin: 8px 0 0;
+  color: #b91c1c;
+  font-size: 0.9rem;
+}
+
+/* Si no hay mensaje, no ocupa espacio */
+.task-form__error:empty {
+  display: none;
+}
+
+.task-form__input[aria-invalid="true"] {
+  border-color: #b91c1c;
+}
+
+/* Si la lista está vacía, se oculta la tarjeta blanca */
+.task-list:empty {
+  display: none;
+}

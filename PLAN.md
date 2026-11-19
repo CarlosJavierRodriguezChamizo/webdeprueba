@@ -25,8 +25,8 @@ lista con 3 tareas de ejemplo en el HTML. Sin JavaScript.
 ## Fase 2 · Añadir tareas
 Crear app.js: al enviar el formulario, añadir la tarea a un array y pintar la
 lista. Eliminar las tareas de ejemplo. No permitir tareas vacías.
-- [ ] Las tareas nuevas aparecen en la lista
-- [ ] No se pueden añadir tareas vacías
+- [x] Las tareas nuevas aparecen en la lista
+- [x] No se pueden añadir tareas vacías
 
 ## Fase 3 · Guardar las tareas
 Crear storage.js con funciones para guardar y cargar en localStorage. Guardar

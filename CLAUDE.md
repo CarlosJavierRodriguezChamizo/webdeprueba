@@ -29,7 +29,7 @@ por fases siguiendo `PLAN.md`.
 `storage.js` debe cargarse antes que `app.js` en `index.html`.
 
 ## Estado actual
-Fase 1 completada: maqueta estática (`index.html` + `styles.css`), sin JavaScript.
+Fase 2 completada: `app.js` añade tareas a un array y pinta la lista (sin guardar todavía).
 
 ## Convenciones
 - Idioma: interfaz, comentarios y nombres de commits en español.
