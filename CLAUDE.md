@@ -29,7 +29,7 @@ por fases siguiendo `PLAN.md`.
 `storage.js` debe cargarse antes que `app.js` en `index.html`.
 
 ## Estado actual
-Fase 2 completada: `app.js` añade tareas a un array y pinta la lista (sin guardar todavía).
+Fase 8 completada: app terminada y pulida (botón ✎ para editar con teclado, mensaje de lista vacía, foco gestionado tras cada cambio, contraste revisado). Tareas: `{ id, text, completed, priority, dueDate }`.
 
 ## Convenciones
 - Idioma: interfaz, comentarios y nombres de commits en español.

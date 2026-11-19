@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gestor de tareas sencillo: añade, completa, edita y filtra tus tareas.">
   <title>Gestor de tareas</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- storage.js va antes porque app.js usa sus funciones -->
+  <script src="storage.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -15,27 +18,56 @@
     </header>
 
     <form class="task-form" id="task-form" novalidate>
-      <label for="task-input" class="task-form__label">Nueva tarea</label>
-      <div class="task-form__row">
+      <div class="field">
+        <label for="task-input">Nueva tarea</label>
         <input
           type="text"
           id="task-input"
           name="task"
-          class="task-form__input"
           placeholder="Ej.: Comprar pan"
           autocomplete="off"
           required
           aria-describedby="task-error"
         >
-        <button type="submit" class="btn btn--primary">Añadir</button>
       </div>
       <p id="task-error" class="task-form__error" role="alert"></p>
+
+      <!-- Orden pensado para el teclado: texto → prioridad → fecha → Añadir -->
+      <div class="task-form__options">
+        <div class="field">
+          <label for="task-priority">Prioridad</label>
+          <select id="task-priority" name="priority">
+            <option value="alta">Alta</option>
+            <option value="media" selected>Media</option>
+            <option value="baja">Baja</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="task-due">Fecha límite <span class="field__hint">(opcional)</span></label>
+          <input type="date" id="task-due" name="due">
+        </div>
+        <button type="submit" class="btn btn--primary">Añadir</button>
+      </div>
     </form>
 
-    <section aria-labelledby="list-title">
+    <section class="tasks" aria-labelledby="list-title">
       <h2 id="list-title" class="visually-hidden">Lista de tareas</h2>
       <ul class="task-list" id="task-list"></ul>
+      <p class="empty-message" id="empty-message" hidden></p>
     </section>
+
+    <footer class="toolbar">
+      <!-- aria-live: los lectores de pantalla anuncian el contador cuando cambia -->
+      <p class="toolbar__count" id="task-count" aria-live="polite"></p>
+
+      <div class="filters" role="group" aria-label="Filtrar tareas">
+        <button type="button" class="filters__button" data-filter="todas" aria-pressed="true">Todas</button>
+        <button type="button" class="filters__button" data-filter="pendientes" aria-pressed="false">Pendientes</button>
+        <button type="button" class="filters__button" data-filter="completadas" aria-pressed="false">Completadas</button>
+      </div>
+
+      <button type="button" class="toolbar__clear" id="clear-completed">Borrar completadas</button>
+    </footer>
   </main>
 </body>
 </html>

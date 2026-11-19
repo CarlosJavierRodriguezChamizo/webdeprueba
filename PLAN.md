@@ -31,34 +31,34 @@ lista. Eliminar las tareas de ejemplo. No permitir tareas vacías.
 ## Fase 3 · Guardar las tareas
 Crear storage.js con funciones para guardar y cargar en localStorage. Guardar
 tras cada cambio y cargar al abrir la página.
-- [ ] Las tareas siguen ahí al recargar
+- [x] Las tareas siguen ahí al recargar
 
 ## Fase 4 · Completar y eliminar
 Casilla para marcar como completada (texto tachado) y botón para eliminar.
-- [ ] Completar funciona y se mantiene al recargar
-- [ ] Eliminar funciona y se mantiene al recargar
+- [x] Completar funciona y se mantiene al recargar
+- [x] Eliminar funciona y se mantiene al recargar
 
 ## Fase 5 · Editar
 Editar el texto con doble clic. Enter guarda y Escape cancela.
-- [ ] La edición se guarda correctamente
+- [x] La edición se guarda correctamente
 
 ## Fase 6 · Filtros y contador
 Filtros Todas / Pendientes / Completadas, contador de pendientes y botón
 "Borrar completadas".
-- [ ] Los filtros muestran las tareas correctas
-- [ ] El contador se actualiza
+- [x] Los filtros muestran las tareas correctas
+- [x] El contador se actualiza
 
 ## Fase 7 · Prioridad y fecha límite
 Prioridad alta / media / baja con un color para cada una y fecha límite
 opcional. Ordenar por prioridad y marcar en rojo las vencidas.
-- [ ] Las tareas se ordenan por prioridad
-- [ ] Las vencidas se destacan en rojo
+- [x] Las tareas se ordenan por prioridad
+- [x] Las vencidas se destacan en rojo
 
 ## Fase 8 · Pulido
 Revisar el diseño en móvil, la accesibilidad (etiquetas y teclado), mostrar un
 mensaje cuando la lista esté vacía y limpiar el código.
-- [ ] Se puede usar solo con el teclado
-- [ ] No hay errores en la consola
+- [x] Se puede usar solo con el teclado
+- [x] No hay errores en la consola
 
 ## Fase 9 · Publicación
 Subir a GitHub y publicar en GitHub Pages.
