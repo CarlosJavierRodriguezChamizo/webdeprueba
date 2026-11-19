@@ -1,25 +1,27 @@
 :root {
-  --bg: #f4f6fb;
-  --bg-accent: #e3e9f7;
+  --bg: #fff7f0;
+  --bg-accent: #ffe1c7;
   --card: #ffffff;
-  --text: #1b2333;
-  --muted: #5b6578;
-  --primary: #3b5bdb;
-  --primary-hover: #2f4ac0;
-  --border: #dde3ee;
+  --text: #2b1a0e;
+  --muted: #7a5a44;
+  --primary: #e8590c;
+  --primary-hover: #c94a06;
+  --on-primary: #ffffff;
+  --border: #f5dcc6;
   --ok: #2b8a3e;
   --error: #c92a2a;
 }
 
 [data-theme="dark"] {
-  --bg: #0f1420;
-  --bg-accent: #1a2235;
-  --card: #171e2e;
-  --text: #e8ecf4;
-  --muted: #9aa5ba;
-  --primary: #748ffc;
-  --primary-hover: #91a7ff;
-  --border: #2a3448;
+  --bg: #1a120c;
+  --bg-accent: #3a2312;
+  --card: #231811;
+  --text: #fbeee3;
+  --muted: #c4a58c;
+  --primary: #ff922b;
+  --primary-hover: #ffa94d;
+  --on-primary: #2b1a0e;
+  --border: #45301f;
   --ok: #69db7c;
   --error: #ff8787;
 }
@@ -125,7 +127,7 @@ h1 { font-size: clamp(1.6rem, 5vw, 2.2rem); margin-bottom: 12px; }
   border-radius: 10px;
   padding: 12px 18px;
   background: var(--primary);
-  color: #fff;
+  color: var(--on-primary);
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
