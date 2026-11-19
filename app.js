@@ -1,6 +1,7 @@
 // ===== Estado =====
 // Todas las tareas viven en este array. La lista de la página se "pinta" a partir de él.
-const tasks = [];
+// Al abrir la página se cargan las tareas guardadas (funciones de storage.js).
+const tasks = loadTasks();
 
 // ===== Referencias a elementos del HTML =====
 const form = document.getElementById("task-form");
@@ -43,6 +44,7 @@ function addTask(text) {
     id: Date.now(), // identificador único; lo usaremos en fases siguientes
     text: text,
   });
+  saveTasks(tasks); // guardar después de cada cambio
   renderTasks();
 }
 
@@ -67,5 +69,5 @@ form.addEventListener("submit", (event) => {
 // Al empezar a escribir, el aviso de error desaparece.
 input.addEventListener("input", clearError);
 
-// Pintado inicial (la lista empieza vacía).
+// Pintado inicial con las tareas cargadas.
 renderTasks();

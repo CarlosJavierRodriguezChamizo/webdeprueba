@@ -31,7 +31,7 @@ lista. Eliminar las tareas de ejemplo. No permitir tareas vacías.
 ## Fase 3 · Guardar las tareas
 Crear storage.js con funciones para guardar y cargar en localStorage. Guardar
 tras cada cambio y cargar al abrir la página.
-- [ ] Las tareas siguen ahí al recargar
+- [x] Las tareas siguen ahí al recargar
 
 ## Fase 4 · Completar y eliminar
 Casilla para marcar como completada (texto tachado) y botón para eliminar.

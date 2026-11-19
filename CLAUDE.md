@@ -29,7 +29,7 @@ por fases siguiendo `PLAN.md`.
 `storage.js` debe cargarse antes que `app.js` en `index.html`.
 
 ## Estado actual
-Fase 2 completada: `app.js` añade tareas a un array y pinta la lista (sin guardar todavía).
+Fase 3 completada: las tareas se guardan en `localStorage` (clave `gestor-tareas`) tras cada cambio y se cargan al abrir la página.
 
 ## Convenciones
 - Idioma: interfaz, comentarios y nombres de commits en español.
