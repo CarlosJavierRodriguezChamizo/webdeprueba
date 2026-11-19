@@ -29,9 +29,7 @@ por fases siguiendo `PLAN.md`.
 `storage.js` debe cargarse antes que `app.js` en `index.html`.
 
 ## Estado actual
-El repositorio contiene una página de mantenimiento anterior (`index.html`,
-`styles.css`, `script.js`) que no forma parte del gestor de tareas. En la Fase 1 se
-sustituirán `index.html` y `styles.css`, y `script.js` dejará de usarse.
+Fase 1 completada: maqueta estática (`index.html` + `styles.css`), sin JavaScript.
 
 ## Convenciones
 - Idioma: interfaz, comentarios y nombres de commits en español.

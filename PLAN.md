@@ -20,7 +20,7 @@
 ## Fase 1 · Maqueta estática
 Crear index.html y styles.css con título, formulario para añadir tareas y una
 lista con 3 tareas de ejemplo en el HTML. Sin JavaScript.
-- [ ] Se ve bien en ordenador y móvil
+- [x] Se ve bien en ordenador y móvil
 
 ## Fase 2 · Añadir tareas
 Crear app.js: al enviar el formulario, añadir la tarea a un array y pintar la
