@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Sitio en mantenimiento</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="card">
+    <div class="icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/>
+      </svg>
+    </div>
+
+    <h1>Estamos en mantenimiento</h1>
+    <p class="lead">Estamos realizando mejoras en la web. Volveremos a estar disponibles muy pronto. Gracias por tu paciencia.</p>
+
+    <div class="countdown" id="countdown" aria-live="polite">
+      <div><span id="d">00</span><small>Días</small></div>
+      <div><span id="h">00</span><small>Horas</small></div>
+      <div><span id="m">00</span><small>Min</small></div>
+      <div><span id="s">00</span><small>Seg</small></div>
+    </div>
+
+    <div class="progress" role="progressbar" aria-label="Progreso del mantenimiento" aria-valuemin="0" aria-valuemax="100">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <p class="progress-label" id="progress-label">Progreso: 0%</p>
+
+    <form class="notify" id="notify-form" novalidate>
+      <label for="email" class="sr-only">Correo electrónico</label>
+      <input type="email" id="email" placeholder="Tu correo electrónico" required>
+      <button type="submit">Avísame</button>
+    </form>
+    <p class="message" id="form-message" aria-live="polite"></p>
+
+    <footer>
+      <button class="theme-toggle" id="theme-toggle" type="button">Cambiar tema</button>
+      <p>&copy; <span id="year"></span> · Todos los derechos reservados</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
