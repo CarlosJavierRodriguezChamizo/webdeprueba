@@ -29,7 +29,7 @@ por fases siguiendo `PLAN.md`.
 `storage.js` debe cargarse antes que `app.js` en `index.html`.
 
 ## Estado actual
-Fase 4 completada: cada tarea tiene casilla de completada (texto tachado) y botón de eliminar; todo se guarda en `localStorage` (clave `gestor-tareas`, tareas `{ id, text, completed }`).
+Fase 5 completada: editar el texto con doble clic (Enter guarda, Escape cancela).
 
 ## Convenciones
 - Idioma: interfaz, comentarios y nombres de commits en español.

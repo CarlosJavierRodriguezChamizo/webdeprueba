@@ -28,21 +28,23 @@ function createTaskItem(task) {
     item.classList.add("task--completed"); // esta clase tacha el texto (ver styles.css)
   }
 
-  // La casilla y el texto van dentro de un <label>: así, pulsar el texto también marca la casilla.
-  const label = document.createElement("label");
-  label.className = "task__label";
+  const textId = `task-text-${task.id}`;
 
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   checkbox.className = "task__checkbox";
   checkbox.checked = task.completed;
+  // El texto no va dentro de un <label> (un doble clic marcaría la casilla),
+  // así que lo enlazamos con aria-labelledby para que la casilla tenga nombre.
+  checkbox.setAttribute("aria-labelledby", textId);
   checkbox.addEventListener("change", () => toggleTask(task.id));
 
   const text = document.createElement("span");
   text.className = "task__text";
+  text.id = textId;
   text.textContent = task.text; // textContent: el texto del usuario nunca se interpreta como HTML
-
-  label.append(checkbox, text);
+  text.title = "Doble clic para editar";
+  text.addEventListener("dblclick", () => startEditing(item, task));
 
   const deleteButton = document.createElement("button");
   deleteButton.type = "button";
@@ -52,8 +54,63 @@ function createTaskItem(task) {
   deleteButton.setAttribute("aria-label", `Eliminar tarea: ${task.text}`);
   deleteButton.addEventListener("click", () => deleteTask(task.id));
 
-  item.append(label, deleteButton);
+  item.append(checkbox, text, deleteButton);
   return item;
+}
+
+// ===== Editar una tarea =====
+// Cambia el texto de la tarea por un campo de texto. Enter guarda, Escape cancela.
+function startEditing(item, task) {
+  const text = item.querySelector(".task__text");
+
+  const editInput = document.createElement("input");
+  editInput.type = "text";
+  editInput.className = "task__edit";
+  editInput.value = task.text;
+  editInput.setAttribute("aria-label", "Editar tarea");
+
+  // Evita guardar dos veces (Enter guarda y, al repintar, el campo pierde el foco → blur).
+  let finished = false;
+
+  function finish(save) {
+    if (finished) return;
+    finished = true;
+
+    const newText = editInput.value.trim();
+    if (save && newText !== "") {
+      updateTaskText(task.id, newText);
+    } else {
+      renderTasks(); // cancelar: volvemos a pintar la tarea como estaba
+    }
+    focusTask(task.id, ".task__checkbox");
+  }
+
+  editInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") finish(true);
+    if (event.key === "Escape") finish(false);
+  });
+  // Si se hace clic fuera, se guarda (igual que pulsar Enter).
+  editInput.addEventListener("blur", () => finish(true));
+
+  text.replaceWith(editInput);
+  editInput.focus();
+  editInput.select(); // selecciona todo el texto para poder reescribirlo directamente
+}
+
+function updateTaskText(id, newText) {
+  const task = tasks.find((t) => t.id === id);
+  if (!task) return;
+
+  task.text = newText;
+  saveTasks(tasks);
+  renderTasks();
+}
+
+// Después de repintar, los elementos son nuevos: esta función pone el foco
+// en un elemento de la tarea indicada (si todavía existe).
+function focusTask(id, selector) {
+  const element = list.querySelector(`[data-id="${id}"] ${selector}`);
+  if (element) element.focus();
 }
 
 // ===== Mensajes de error =====
@@ -90,7 +147,7 @@ function toggleTask(id) {
 
   // Al repintar, la casilla se crea de nuevo y se pierde el foco: lo devolvemos a ella
   // para que quien usa el teclado pueda seguir donde estaba.
-  list.querySelector(`[data-id="${id}"] .task__checkbox`).focus();
+  focusTask(id, ".task__checkbox");
 }
 
 // ===== Eliminar una tarea =====

@@ -40,7 +40,7 @@ Casilla para marcar como completada (texto tachado) y botón para eliminar.
 
 ## Fase 5 · Editar
 Editar el texto con doble clic. Enter guarda y Escape cancela.
-- [ ] La edición se guarda correctamente
+- [x] La edición se guarda correctamente
 
 ## Fase 6 · Filtros y contador
 Filtros Todas / Pendientes / Completadas, contador de pendientes y botón

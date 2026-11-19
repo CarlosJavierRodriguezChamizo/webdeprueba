@@ -140,15 +140,6 @@ body {
   border-bottom: none;
 }
 
-.task__label {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  gap: 12px;
-  min-width: 0;
-  cursor: pointer;
-}
-
 .task__checkbox {
   flex-shrink: 0;
   width: 20px;
@@ -159,7 +150,25 @@ body {
 }
 
 .task__text {
+  flex: 1;
+  min-width: 0;
   overflow-wrap: anywhere;
+  cursor: text;
+}
+
+/* Campo que aparece al editar una tarea (doble clic) */
+.task__edit {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 10px;
+  font: inherit;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius);
+}
+
+.task__edit:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
 }
 
 /* Tarea completada: texto tachado y más claro */
