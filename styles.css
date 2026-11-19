@@ -1,5 +1,9 @@
 /* ===== Variables de color y medidas ===== */
 :root {
+  --color-danger: #b91c1c;
+  --color-alta: #dc2626;
+  --color-media: #d97706;
+  --color-baja: #16a34a;
   --color-bg: #f4f6fb;
   --color-surface: #ffffff;
   --color-text: #1f2937;
@@ -94,6 +98,48 @@ body {
   border-color: var(--color-primary);
 }
 
+/* Prioridad y fecha límite */
+.task-form__options {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.field {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  font-size: 0.9rem;
+}
+
+.field label {
+  font-weight: 600;
+}
+
+.field__hint {
+  font-weight: 400;
+  color: var(--color-muted);
+}
+
+.field select,
+.field input {
+  padding: 8px 10px;
+  font: inherit;
+  color: inherit;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.field select:focus,
+.field input:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+  border-color: var(--color-primary);
+}
+
 /* ===== Botones ===== */
 .btn {
   padding: 10px 18px;
@@ -122,6 +168,7 @@ body {
 .task-list {
   margin: 0;
   padding: 0;
+  overflow: hidden; /* para que el fondo de las tareas respete las esquinas redondeadas */
   list-style: none;
   background: var(--color-surface);
   border-radius: var(--radius);
@@ -149,16 +196,74 @@ body {
   cursor: pointer;
 }
 
-.task__text {
+/* Borde izquierdo de color según la prioridad */
+.task {
+  border-left: 4px solid transparent;
+}
+
+.task--alta {
+  border-left-color: var(--color-alta);
+}
+
+.task--media {
+  border-left-color: var(--color-media);
+}
+
+.task--baja {
+  border-left-color: var(--color-baja);
+}
+
+.task__content {
+  display: flex;
   flex: 1;
+  flex-direction: column;
   min-width: 0;
+}
+
+.task__text {
   overflow-wrap: anywhere;
   cursor: text;
 }
 
+.task__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 2px;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+/* Etiqueta de prioridad: el texto ("Alta"...) acompaña al color */
+.task__priority {
+  font-weight: 600;
+}
+
+.task--alta .task__priority {
+  color: var(--color-alta);
+}
+
+.task--media .task__priority {
+  color: var(--color-media);
+}
+
+.task--baja .task__priority {
+  color: var(--color-baja);
+}
+
+/* Tareas vencidas: fondo y fecha en rojo */
+.task--overdue {
+  background: #fef2f2;
+}
+
+.task--overdue .task__due {
+  font-weight: 600;
+  color: var(--color-danger);
+}
+
 /* Campo que aparece al editar una tarea (doble clic) */
 .task__edit {
-  flex: 1;
+  width: 100%;
   min-width: 0;
   padding: 6px 10px;
   font: inherit;
@@ -192,7 +297,7 @@ body {
 }
 
 .task__delete:hover {
-  color: #b91c1c;
+  color: var(--color-danger);
   background: #fee2e2;
 }
 
@@ -289,7 +394,7 @@ body {
 /* ===== Mensaje de error del formulario ===== */
 .task-form__error {
   margin: 8px 0 0;
-  color: #b91c1c;
+  color: var(--color-danger);
   font-size: 0.9rem;
 }
 
@@ -299,7 +404,7 @@ body {
 }
 
 .task-form__input[aria-invalid="true"] {
-  border-color: #b91c1c;
+  border-color: var(--color-danger);
 }
 
 /* Si la lista está vacía, se oculta la tarjeta blanca */

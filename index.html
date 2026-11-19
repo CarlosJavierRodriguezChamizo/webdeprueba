@@ -31,6 +31,21 @@
         >
         <button type="submit" class="btn btn--primary">Añadir</button>
       </div>
+
+      <div class="task-form__options">
+        <div class="field">
+          <label for="task-priority">Prioridad</label>
+          <select id="task-priority" name="priority">
+            <option value="alta">Alta</option>
+            <option value="media" selected>Media</option>
+            <option value="baja">Baja</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="task-due">Fecha límite <span class="field__hint">(opcional)</span></label>
+          <input type="date" id="task-due" name="due">
+        </div>
+      </div>
       <p id="task-error" class="task-form__error" role="alert"></p>
     </form>
 

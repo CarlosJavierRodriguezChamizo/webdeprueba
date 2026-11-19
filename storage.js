@@ -3,6 +3,7 @@
 // y lo volvemos a convertir en array al cargar.
 
 const STORAGE_KEY = "gestor-tareas";
+const VALID_PRIORITIES = ["alta", "media", "baja"];
 
 // Guarda el array de tareas.
 function saveTasks(tasks) {
@@ -24,13 +25,16 @@ function loadTasks() {
     }
 
     // Nos quedamos solo con las tareas que tienen el formato esperado.
-    // Las tareas guardadas antes de la Fase 4 no tienen "completed": las damos por pendientes.
+    // Las tareas guardadas en fases anteriores pueden no tener todos los campos:
+    // les damos un valor por defecto (pendiente, prioridad media, sin fecha).
     return data
       .filter((task) => task && typeof task.text === "string")
       .map((task) => ({
         id: task.id,
         text: task.text,
         completed: task.completed === true,
+        priority: VALID_PRIORITIES.includes(task.priority) ? task.priority : "media",
+        dueDate: typeof task.dueDate === "string" ? task.dueDate : "",
       }));
   } catch (error) {
     // Datos corruptos o localStorage no disponible: empezamos con la lista vacía.

@@ -6,9 +6,15 @@ let tasks = loadTasks();
 // Filtro activo: "todas", "pendientes" o "completadas".
 let currentFilter = "todas";
 
+// Orden de las prioridades (número menor = sale antes) y texto que se muestra.
+const PRIORITY_ORDER = { alta: 0, media: 1, baja: 2 };
+const PRIORITY_LABELS = { alta: "Alta", media: "Media", baja: "Baja" };
+
 // ===== Referencias a elementos del HTML =====
 const form = document.getElementById("task-form");
 const input = document.getElementById("task-input");
+const prioritySelect = document.getElementById("task-priority");
+const dueInput = document.getElementById("task-due");
 const list = document.getElementById("task-list");
 const errorMessage = document.getElementById("task-error");
 const counter = document.getElementById("task-count");
@@ -28,15 +34,41 @@ function renderTasks() {
   updateFilterButtons();
 }
 
-// Devuelve solo las tareas que corresponden al filtro activo.
+// Devuelve las tareas del filtro activo, ordenadas por prioridad (alta → media → baja).
 function getVisibleTasks() {
+  let visible = tasks;
   if (currentFilter === "pendientes") {
-    return tasks.filter((task) => !task.completed);
+    visible = tasks.filter((task) => !task.completed);
+  } else if (currentFilter === "completadas") {
+    visible = tasks.filter((task) => task.completed);
   }
-  if (currentFilter === "completadas") {
-    return tasks.filter((task) => task.completed);
-  }
-  return tasks;
+
+  // slice() hace una copia para no cambiar el orden del array original.
+  // Si dos tareas tienen la misma prioridad, sort mantiene su orden de creación.
+  return visible
+    .slice()
+    .sort((a, b) => PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority]);
+}
+
+// ===== Fechas =====
+// Fecha de hoy en formato "AAAA-MM-DD" (el mismo que usa <input type="date">).
+function getTodayString() {
+  const now = new Date();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${now.getFullYear()}-${month}-${day}`;
+}
+
+// Una tarea está vencida si tiene fecha, esa fecha ya pasó y no está completada.
+// Las fechas "AAAA-MM-DD" se pueden comparar directamente como texto.
+function isOverdue(task) {
+  return task.dueDate !== "" && task.dueDate < getTodayString() && !task.completed;
+}
+
+// "2026-11-21" → "21/11/2026"
+function formatDate(dateString) {
+  const [year, month, day] = dateString.split("-");
+  return `${day}/${month}/${year}`;
 }
 
 // ===== Contador y botones =====
@@ -61,8 +93,12 @@ function createTaskItem(task) {
   const item = document.createElement("li");
   item.className = "task";
   item.dataset.id = task.id; // guarda el id en el HTML (atributo data-id) para encontrar el <li> después
+  item.classList.add(`task--${task.priority}`); // color de la prioridad (ver styles.css)
   if (task.completed) {
     item.classList.add("task--completed"); // esta clase tacha el texto (ver styles.css)
+  }
+  if (isOverdue(task)) {
+    item.classList.add("task--overdue"); // las vencidas se destacan en rojo
   }
 
   const textId = `task-text-${task.id}`;
@@ -83,6 +119,28 @@ function createTaskItem(task) {
   text.title = "Doble clic para editar";
   text.addEventListener("dblclick", () => startEditing(item, task));
 
+  // Debajo del texto: etiqueta de prioridad y, si la hay, la fecha límite.
+  const details = document.createElement("span");
+  details.className = "task__details";
+
+  const priority = document.createElement("span");
+  priority.className = "task__priority";
+  priority.textContent = PRIORITY_LABELS[task.priority];
+  details.appendChild(priority);
+
+  if (task.dueDate !== "") {
+    const due = document.createElement("span");
+    due.className = "task__due";
+    const prefix = isOverdue(task) ? "Vencida: " : "Vence: ";
+    due.textContent = prefix + formatDate(task.dueDate);
+    details.appendChild(due);
+  }
+
+  // El texto y los detalles van juntos en un bloque.
+  const content = document.createElement("div");
+  content.className = "task__content";
+  content.append(text, details);
+
   const deleteButton = document.createElement("button");
   deleteButton.type = "button";
   deleteButton.className = "task__delete";
@@ -91,7 +149,7 @@ function createTaskItem(task) {
   deleteButton.setAttribute("aria-label", `Eliminar tarea: ${task.text}`);
   deleteButton.addEventListener("click", () => deleteTask(task.id));
 
-  item.append(checkbox, text, deleteButton);
+  item.append(checkbox, content, deleteButton);
   return item;
 }
 
@@ -162,11 +220,13 @@ function clearError() {
 }
 
 // ===== Añadir una tarea =====
-function addTask(text) {
+function addTask(text, priority, dueDate) {
   tasks.push({
     id: Date.now(), // identificador único para encontrar la tarea al completarla o eliminarla
     text: text,
     completed: false,
+    priority: priority, // "alta", "media" o "baja"
+    dueDate: dueDate, // "AAAA-MM-DD" o "" si no tiene fecha
   });
   saveTasks(tasks); // guardar después de cada cambio
   renderTasks();
@@ -219,8 +279,12 @@ form.addEventListener("submit", (event) => {
   }
 
   clearError();
-  addTask(text);
+  addTask(text, prioritySelect.value, dueInput.value);
+
+  // Dejamos el formulario listo para la siguiente tarea.
   input.value = "";
+  prioritySelect.value = "media";
+  dueInput.value = "";
   input.focus();
 });
 

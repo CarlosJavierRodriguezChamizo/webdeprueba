@@ -51,8 +51,8 @@ Filtros Todas / Pendientes / Completadas, contador de pendientes y botón
 ## Fase 7 · Prioridad y fecha límite
 Prioridad alta / media / baja con un color para cada una y fecha límite
 opcional. Ordenar por prioridad y marcar en rojo las vencidas.
-- [ ] Las tareas se ordenan por prioridad
-- [ ] Las vencidas se destacan en rojo
+- [x] Las tareas se ordenan por prioridad
+- [x] Las vencidas se destacan en rojo
 
 ## Fase 8 · Pulido
 Revisar el diseño en móvil, la accesibilidad (etiquetas y teclado), mostrar un

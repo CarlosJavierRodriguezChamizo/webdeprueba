@@ -29,7 +29,7 @@ por fases siguiendo `PLAN.md`.
 `storage.js` debe cargarse antes que `app.js` en `index.html`.
 
 ## Estado actual
-Fase 6 completada: filtros Todas / Pendientes / Completadas, contador de pendientes y botón "Borrar completadas".
+Fase 7 completada: prioridad alta / media / baja con color, fecha límite opcional, orden por prioridad y vencidas en rojo. Tareas: `{ id, text, completed, priority, dueDate }`.
 
 ## Convenciones
 - Idioma: interfaz, comentarios y nombres de commits en español.
