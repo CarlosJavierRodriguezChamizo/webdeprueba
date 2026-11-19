@@ -24,7 +24,14 @@ function loadTasks() {
     }
 
     // Nos quedamos solo con las tareas que tienen el formato esperado.
-    return data.filter((task) => task && typeof task.text === "string");
+    // Las tareas guardadas antes de la Fase 4 no tienen "completed": las damos por pendientes.
+    return data
+      .filter((task) => task && typeof task.text === "string")
+      .map((task) => ({
+        id: task.id,
+        text: task.text,
+        completed: task.completed === true,
+      }));
   } catch (error) {
     // Datos corruptos o localStorage no disponible: empezamos con la lista vacía.
     return [];

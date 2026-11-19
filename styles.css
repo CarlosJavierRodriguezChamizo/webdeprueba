@@ -129,7 +129,10 @@ body {
 }
 
 .task {
-  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px 10px 16px;
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -137,8 +140,57 @@ body {
   border-bottom: none;
 }
 
+.task__label {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.task__checkbox {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
 .task__text {
   overflow-wrap: anywhere;
+}
+
+/* Tarea completada: texto tachado y más claro */
+.task--completed .task__text {
+  color: var(--color-muted);
+  text-decoration: line-through;
+}
+
+/* Botón eliminar */
+.task__delete {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--color-muted);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.task__delete:hover {
+  color: #b91c1c;
+  background: #fee2e2;
+}
+
+.task__checkbox:focus-visible,
+.task__delete:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 /* ===== Móvil ===== */

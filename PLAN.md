@@ -35,8 +35,8 @@ tras cada cambio y cargar al abrir la página.
 
 ## Fase 4 · Completar y eliminar
 Casilla para marcar como completada (texto tachado) y botón para eliminar.
-- [ ] Completar funciona y se mantiene al recargar
-- [ ] Eliminar funciona y se mantiene al recargar
+- [x] Completar funciona y se mantiene al recargar
+- [x] Eliminar funciona y se mantiene al recargar
 
 ## Fase 5 · Editar
 Editar el texto con doble clic. Enter guarda y Escape cancela.
