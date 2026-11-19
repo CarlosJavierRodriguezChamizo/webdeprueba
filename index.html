@@ -38,6 +38,19 @@
       <h2 id="list-title" class="visually-hidden">Lista de tareas</h2>
       <ul class="task-list" id="task-list"></ul>
     </section>
+
+    <footer class="toolbar">
+      <!-- aria-live: los lectores de pantalla anuncian el contador cuando cambia -->
+      <p class="toolbar__count" id="task-count" aria-live="polite"></p>
+
+      <div class="filters" role="group" aria-label="Filtrar tareas">
+        <button type="button" class="filters__button" data-filter="todas" aria-pressed="true">Todas</button>
+        <button type="button" class="filters__button" data-filter="pendientes" aria-pressed="false">Pendientes</button>
+        <button type="button" class="filters__button" data-filter="completadas" aria-pressed="false">Completadas</button>
+      </div>
+
+      <button type="button" class="toolbar__clear" id="clear-completed">Borrar completadas</button>
+    </footer>
   </main>
 </body>
 </html>

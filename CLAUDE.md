@@ -29,7 +29,7 @@ por fases siguiendo `PLAN.md`.
 `storage.js` debe cargarse antes que `app.js` en `index.html`.
 
 ## Estado actual
-Fase 5 completada: editar el texto con doble clic (Enter guarda, Escape cancela).
+Fase 6 completada: filtros Todas / Pendientes / Completadas, contador de pendientes y botón "Borrar completadas".
 
 ## Convenciones
 - Idioma: interfaz, comentarios y nombres de commits en español.

@@ -1,21 +1,58 @@
 // ===== Estado =====
 // Todas las tareas viven en este array. La lista de la página se "pinta" a partir de él.
 // Al abrir la página se cargan las tareas guardadas (funciones de storage.js).
-const tasks = loadTasks();
+let tasks = loadTasks();
+
+// Filtro activo: "todas", "pendientes" o "completadas".
+let currentFilter = "todas";
 
 // ===== Referencias a elementos del HTML =====
 const form = document.getElementById("task-form");
 const input = document.getElementById("task-input");
 const list = document.getElementById("task-list");
 const errorMessage = document.getElementById("task-error");
+const counter = document.getElementById("task-count");
+const filterButtons = document.querySelectorAll(".filters__button");
+const clearCompletedButton = document.getElementById("clear-completed");
 
 // ===== Pintar la lista =====
-// Vacía la lista y vuelve a crear un <li> por cada tarea del array.
+// Vacía la lista y vuelve a crear un <li> por cada tarea visible según el filtro.
 function renderTasks() {
   list.textContent = "";
 
-  tasks.forEach((task) => {
+  getVisibleTasks().forEach((task) => {
     list.appendChild(createTaskItem(task));
+  });
+
+  updateCounter();
+  updateFilterButtons();
+}
+
+// Devuelve solo las tareas que corresponden al filtro activo.
+function getVisibleTasks() {
+  if (currentFilter === "pendientes") {
+    return tasks.filter((task) => !task.completed);
+  }
+  if (currentFilter === "completadas") {
+    return tasks.filter((task) => task.completed);
+  }
+  return tasks;
+}
+
+// ===== Contador y botones =====
+function updateCounter() {
+  const pending = tasks.filter((task) => !task.completed).length;
+  counter.textContent = pending === 1 ? "1 tarea pendiente" : `${pending} tareas pendientes`;
+
+  // "Borrar completadas" solo se puede pulsar si hay alguna completada.
+  clearCompletedButton.disabled = !tasks.some((task) => task.completed);
+}
+
+// Marca visualmente (y para lectores de pantalla) qué filtro está activo.
+function updateFilterButtons() {
+  filterButtons.forEach((button) => {
+    const isActive = button.dataset.filter === currentFilter;
+    button.setAttribute("aria-pressed", String(isActive));
   });
 }
 
@@ -161,6 +198,14 @@ function deleteTask(id) {
   input.focus(); // el botón pulsado ya no existe: llevamos el foco al campo de texto
 }
 
+// ===== Borrar completadas =====
+function clearCompleted() {
+  // filter crea un array nuevo solo con las pendientes; por eso tasks es "let" y no "const".
+  tasks = tasks.filter((task) => !task.completed);
+  saveTasks(tasks);
+  renderTasks();
+}
+
 // ===== Eventos =====
 form.addEventListener("submit", (event) => {
   event.preventDefault(); // evita que el formulario recargue la página
@@ -181,6 +226,19 @@ form.addEventListener("submit", (event) => {
 
 // Al empezar a escribir, el aviso de error desaparece.
 input.addEventListener("input", clearError);
+
+// Filtros: cada botón guarda su filtro en el atributo data-filter.
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    currentFilter = button.dataset.filter;
+    renderTasks();
+  });
+});
+
+clearCompletedButton.addEventListener("click", () => {
+  clearCompleted();
+  input.focus(); // el botón queda desactivado, así que movemos el foco a un sitio útil
+});
 
 // Pintado inicial con las tareas cargadas.
 renderTasks();

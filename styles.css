@@ -202,6 +202,64 @@ body {
   outline-offset: 2px;
 }
 
+/* ===== Barra inferior: contador, filtros y borrar completadas ===== */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.toolbar__count {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.filters {
+  display: flex;
+  gap: 4px;
+}
+
+.filters__button,
+.toolbar__clear {
+  padding: 6px 12px;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.filters__button:hover,
+.toolbar__clear:hover:not(:disabled) {
+  border-color: var(--color-border);
+  background: var(--color-surface);
+}
+
+/* Filtro activo */
+.filters__button[aria-pressed="true"] {
+  color: var(--color-primary);
+  font-weight: 600;
+  border-color: var(--color-primary);
+  background: var(--color-surface);
+}
+
+.toolbar__clear:disabled {
+  color: var(--color-muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.filters__button:focus-visible,
+.toolbar__clear:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 /* ===== Móvil ===== */
 @media (max-width: 480px) {
   .app {
@@ -215,6 +273,16 @@ body {
   /* En pantallas estrechas el botón pasa debajo del campo */
   .task-form__row {
     flex-direction: column;
+  }
+
+  /* Los filtros ocupan toda una fila y se reparten el ancho */
+  .filters {
+    order: 3;
+    width: 100%;
+  }
+
+  .filters__button {
+    flex: 1;
   }
 }
 

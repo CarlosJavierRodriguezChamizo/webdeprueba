@@ -45,8 +45,8 @@ Editar el texto con doble clic. Enter guarda y Escape cancela.
 ## Fase 6 · Filtros y contador
 Filtros Todas / Pendientes / Completadas, contador de pendientes y botón
 "Borrar completadas".
-- [ ] Los filtros muestran las tareas correctas
-- [ ] El contador se actualiza
+- [x] Los filtros muestran las tareas correctas
+- [x] El contador se actualiza
 
 ## Fase 7 · Prioridad y fecha límite
 Prioridad alta / media / baja con un color para cada una y fecha límite
