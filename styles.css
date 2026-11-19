@@ -286,9 +286,9 @@ h1 {
 .social a:hover { color: var(--on-primary); background: var(--primary); transform: translateY(-3px); }
 
 /* ===== Animación de entrada ===== */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
-.reveal.visible { opacity: 1; transform: none; }
-.side.reveal { transition-delay: .15s; }
+.reveal { animation: reveal .8s ease both; }
+.side.reveal { animation-delay: .15s; }
+@keyframes reveal { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
 
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
@@ -306,5 +306,4 @@ h1 {
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .reveal { opacity: 1; transform: none; }
 }
