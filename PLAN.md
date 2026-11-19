@@ -57,8 +57,8 @@ opcional. Ordenar por prioridad y marcar en rojo las vencidas.
 ## Fase 8 · Pulido
 Revisar el diseño en móvil, la accesibilidad (etiquetas y teclado), mostrar un
 mensaje cuando la lista esté vacía y limpiar el código.
-- [ ] Se puede usar solo con el teclado
-- [ ] No hay errores en la consola
+- [x] Se puede usar solo con el teclado
+- [x] No hay errores en la consola
 
 ## Fase 9 · Publicación
 Subir a GitHub y publicar en GitHub Pages.

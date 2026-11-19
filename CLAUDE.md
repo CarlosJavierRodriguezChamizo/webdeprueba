@@ -29,7 +29,7 @@ por fases siguiendo `PLAN.md`.
 `storage.js` debe cargarse antes que `app.js` en `index.html`.
 
 ## Estado actual
-Fase 7 completada: prioridad alta / media / baja con color, fecha límite opcional, orden por prioridad y vencidas en rojo. Tareas: `{ id, text, completed, priority, dueDate }`.
+Fase 8 completada: app terminada y pulida (botón ✎ para editar con teclado, mensaje de lista vacía, foco gestionado tras cada cambio, contraste revisado). Tareas: `{ id, text, completed, priority, dueDate }`.
 
 ## Convenciones
 - Idioma: interfaz, comentarios y nombres de commits en español.
